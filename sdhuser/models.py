@@ -21,7 +21,7 @@ class SDHuser(AbstractUser):
         """
         Users who was not invited (registered without invitation code)
         """
-        return cls.objects.filter().count()
+        return cls.objects.filter(invited__isnull=True).count()
 
     def fond(self):
         """
