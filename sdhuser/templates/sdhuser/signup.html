@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+  <br>
+
+  <div id="register">
+    <div class="container">
+      <div id="login-row" class="row justify-content-center align-items-center">
+        <div id="login-column" class="col-md-6">
+          <div id="login-box" class="col-md-12">
+            {% if form.errors %}
+              <div class="error-message">
+                {% trans 'Please fill fields with correct values' %}
+              </div>
+            {% endif %}
+            <form id="login-form" class="form" action="" method="post">
+              {% csrf_token %}
+              <h3 class="text-center text-info">{% trans 'Sign Up' %}</h3>
+              <div class="form-group">
+                <label for="username" class="text-info">{{ form.username.label }}:</label><br>
+                {{ form.username }}
+                <label id="username-error" class="has-error" for="id_first_name">{{ form.username.errors }}</label>
+              </div>
+              <div class="form-group">
+                <label for="password1" class="text-info">{{ form.password1.label }}:</label><br>
+                {{ form.password1 }}
+                <label id="password1-error" class="has-error" for="id_password1">{{ form.password1.errors }}</label>
+              </div>
+              <div class="form-group">
+                <label for="password2" class="text-info">{{ form.password2.label }}:</label><br>
+                {{ form.password2 }}
+                <label id="password2-error" class="has-error" for="id_password2">{{ form.password2.errors }}</label>
+              </div>
+              <div class="form-group mb-4">
+                <label for="email" class="text-info">{{ form.email.label }}:</label><br>
+                {{ form.email }}
+                <label id="email-error" class="has-error" for="id_email">{{ form.email.errors }}</label>
+              </div>
+              <div class="form-group mb-4">
+                <label for="invitation_code" class="text-info">{{ form.invitation_code.label }}:</label><br>
+                {{ form.invitation_code }}
+                <label id="invitation_code-error" class="has-error" for="id_invitation_code">{{ form.invitation_code.errors }}</label>
+              </div>
+
+              <div class="form-group">
+                <input type="submit" name="submit" class="btn btn-info btn-md" value="submit" >
+              </div>
+              <div id="register-link" class="text-right">
+                <a href="{% url 'login' %}" class="text-info">{% trans 'Login here' %}</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br>
+  <br>
+  <br>
+{% endblock %}

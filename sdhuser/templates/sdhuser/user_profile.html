@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+
+<div class="px-5 pt-3 pb-5" style="background-color: lightgrey;">
+
+  <br>
+  <h1 class="bg-secondary p-2" >User profile</h1>
+
+  <h2 class="text-success font-weight-bold" style="font-size: 3rem">{{ user.username }}</h2>
+  <br>
+  <br>
+  <div class="container">
+    <div class="row mb-3">
+      <div class="col-2">
+        {% trans 'Invitation code' %}:
+      </div>
+      <div class="col-8 font-weight-bold">
+        {% if request.user.invitation_code %}
+          {{ request.user.invitation_code }}
+        {% else %}
+          <form method="POST">
+            {% csrf_token %}
+            <input type="submit" class="btn btn-outline-success" value="Generate">
+          </form>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-2">
+        {% trans "I'm invited by" %}:
+      </div>
+      <div class="col-8 font-weight-bold">
+      {% if request.user.invited %}
+        {{ request.user.invited.username }}
+      {% else %}
+        ---
+      {% endif %}
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-2">
+        {% trans 'Invited by me' %}:
+      </div>
+      <div class="col-8 font-weight-bold">
+        <ul>
+          {% for invited in user_invite %}
+            <li>{{ invited.username }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-2">
+        {% trans 'My points' %}:
+      </div>
+      <div class="col-8 font-weight-bold">
+        {{ request.user.points }}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

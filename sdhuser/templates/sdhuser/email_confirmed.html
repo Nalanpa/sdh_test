@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+  <br>
+  <h1>{% trans 'Email confirmed successfully!' %}</h1>
+
+  <div class="">
+    Your can <a href="{% url 'login' %}">login</a> in your profile
+  </div>
+
+  <br>
+  <br>
+  <br>
+{% endblock %}
